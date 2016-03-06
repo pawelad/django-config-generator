@@ -31,7 +31,10 @@ def run():
             'out_file': 'nginx',
             'config_file': 'configs/nginx-config',
             'make_executable': False,
-            'final_dir': '/etc/nginx/sites-enabled/{}'.format(
+            'final_dir': '/etc/nginx/sites-available/{}'.format(
+                PROJECT_INFO['PROJECT_NAME']
+            ),
+            'enabled_dir': '/etc/nginx/sites-enabled/{}'.format(
                 PROJECT_INFO['PROJECT_NAME']
             )
         }
@@ -42,9 +45,17 @@ def run():
         if value['make_executable']:
             make_executable(value['out_file'])
 
-        print("{} config generated successfully".format(key))
-        print("To move it in the right place run "
-              "'mv {} {}'".format(value['out_file'], value['final_dir']))
+        print("{} config generated successfully - "
+              "to move it in the right place run "
+              "'mv {} {}'".format(key, value['out_file'], value['final_dir']))
+
+    print("Make sure log directory exists with "
+          "'mkdir -p {}/log/' command".format(PROJECT_INFO['PROJECT_PATH']))
+
+    print("\nTo apply configs run 'supervisorctl reread && "
+          "supervisorctl update',\n'ln -s {} {}' "
+          "and 'service nginx restart'".format(jobs['Nginx']['final_dir'],
+                                               jobs['Nginx']['enabled_dir']))
 
     # Delete previously set environment variables
     for key in PROJECT_INFO.keys():
