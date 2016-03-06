@@ -7,7 +7,6 @@ source ${PROJECT_PATH}/bin/activate
 export DJANGO_SETTINGS_MODULE=${PROJECT_NAME}.settings
 export PYTHONPATH=${PROJECT_PATH}/app/src:$PYTHONPATH
 mkdir -p ${PROJECT_PATH}/run
-mkdir -p ${PROJECT_PATH}/log
 
 exec ${PROJECT_PATH}/bin/gunicorn ${PROJECT_NAME}.wsgi:application \
 	--name ${PROJECT_NAME} \
@@ -15,4 +14,4 @@ exec ${PROJECT_PATH}/bin/gunicorn ${PROJECT_NAME}.wsgi:application \
 	--user=${PROJECT_USER} --group=${PROJECT_GROUP} \
 	--bind=unix:${PROJECT_PATH}/run/gunicorn.sock \
 	--log-level=info \
-	--log-file=${PROJECT_PATH}/log/${PROJECT_NAME}-gunicorn.log
+	--log-file=${PROJECT_PATH}/log/gunicorn.log
