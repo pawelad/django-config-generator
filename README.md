@@ -1,5 +1,4 @@
-Django Config Generator
-=========================
+# Django Config Generator
 A simple Python script for creating default configs for Django + Gunicorn + 
 Nginx stack that I use in my projects. Project variables are stored in 
 `project_info.py` and then inserted into the configs.
@@ -38,3 +37,12 @@ Then put your project info into `project_info.py` and run the script:
 
 Your config files are now generated. You can move them to proper directories by
 running printed commands.
+
+## Contributions
+Feel free to use, ask, fork, star, report bugs, fix them,
+suggest enhancements and point out any mistakes.
+
+## Authors
+Developed and maintained by [Paweł Adamczak](https://github.com/pawelad).
+
+Released under [MIT License](LICENSE).
